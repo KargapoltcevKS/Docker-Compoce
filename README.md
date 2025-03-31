@@ -29,6 +29,19 @@ Hey, Netology
 - Предоставьте ответ в виде ссылки на https://hub.docker.com/<username_repo>/custom-nginx/general .
 
 ## Решение 1
+1. Установил Docker:
+   - sudo apt-get update;
+   - sudo apt install git curl;
+   - curl -fsSL get .docker.com -o get -docker.sh;
+   - chmod +x get-docker.sh;
+   - ./get-docker.sh
+   - docker pull hello-world;
+   - docker run hello-world
+  
+2.  Установил Docker compose:
+   - curl -L https://github.com/docker/compose/releases/download/v2.5.1/docker compose-`uname -s`-`uname -m` -o /usr/bin/docker-compose;
+   - chmod +x /usr/bin/docker-compose
+   - docker-compose version
 
 ## Задача 2
 1. Запустите ваш образ custom-nginx:1.0.0 командой docker run в соответвии с требованиями:
