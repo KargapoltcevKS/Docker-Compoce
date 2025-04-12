@@ -43,6 +43,22 @@ Hey, Netology
    - chmod +x /usr/bin/docker-compose
    - docker-compose version
 
+3. Зарегистрировался на https://hub.docker.com
+4. Скачал образ nginx:1.21.1
+   - docker pull nginx:1.21.1
+5. Создал Docerfile с заменой дефолтной индекс-страницы согласно задания:
+   FROM nginx:1.21.1
+   COPY ./index.html /usr/share/nginx/html/index.html
+   EXPOSE 80
+7. Собрал докер образ:
+   dokcer build -t custom-nginx:1.0.0 .
+8. Собрал и отправил созданный образ в свой dockerhub-репозиторий
+   docker tag castom-nginx:1.0.0 kargapoltcevks/custom-nginx:1.0.0
+   docker push kargapoltcevks/custom-nginx:1.0.0
+10. Ссылка в dockerhub-репозиторий:
+    https://hub.docker.com/repository/docker/kargapoltcevks/custom-nginx/general
+   
+
 ## Задача 2
 1. Запустите ваш образ custom-nginx:1.0.0 командой docker run в соответвии с требованиями:
 - имя контейнера "ФИО-custom-nginx-t2"
