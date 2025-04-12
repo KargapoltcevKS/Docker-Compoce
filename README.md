@@ -46,7 +46,7 @@ Hey, Netology
 3. Зарегистрировался на https://hub.docker.com
 4. Скачал образ nginx:1.21.1
    - docker pull nginx:1.21.1
-5. Создал Docerfile с заменой дефолтной индекс-страницы согласно задания:
+5. Создал Docerfile с заменой дефолтной индекс-страницы согласно задания
    FROM nginx:1.21.1
    COPY ./index.html /usr/share/nginx/html/index.html
    EXPOSE 80
@@ -71,6 +71,14 @@ Hey, Netology
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
 ## Решение 2
+1. Запустил созданный образ
+  docker run -it --rm -d -p 8080:80 --name kks-custom-nginx-t2 custom-nginx:1.0.0
+2.  Переименовываю контейнер
+  docker rename kks-custom-nginx-t2 custom-nginx-t2
+3. Выполняю команду
+скрин1
+скрин2
+   
 
 ## Задача 3
 1. Воспользуйтесь docker help или google, чтобы узнать как подключиться к стандартному потоку ввода/вывода/ошибок контейнера "custom-nginx-t2".
