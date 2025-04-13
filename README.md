@@ -76,8 +76,9 @@ Hey, Netology
 2.  Переименовываю контейнер
   docker rename kks-custom-nginx-t2 custom-nginx-t2
 3. Выполняю команду
-скрин1
-скрин2
+![2-3](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/2-3.png)
+![2-4-1](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/2-4-1.png)
+![2-4](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/2-4.png)
    
 
 ## Задача 3
@@ -99,25 +100,26 @@ Hey, Netology
 ## Решение 3
 
 1. Подключаемся к контейнеру через docker attach
-СКРИН 3-1
+![3-1](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/3-1.png)
 2.3 Нажимаю Ctrl-C и выполняю команду docker ps -a
 Завершилась работа контейнера, т.к. Ctrl-C это сигнал завершения процесса, для фоновой работы процесса необходимо установить ключ -d и тогда контейнер продолжит работу, а мы отключимся от него.
-Скрин 3-2-3-3
+![3-2-3-3](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/3-2-3-3.png)
 4.5. Перезапускаем контейнер и заходим в интерактивный режим контейнера
 docker exec -it custom-nginx-t2 bash
 6. Устанавливаю текстовый редактор nano
 apt install nano
 7. Отредактируйте файл "/etc/nginx/conf.d/default.conf", заменив порт "listen 80" на "listen 81"
-скрин 3-7
-8. Рестартуемсервер и проверяем доступность портов
+![3-7](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/3-7.png)
+8. Рестартуем сервер и проверяем доступность портов
 80 порт закрылся и открылся 81
-скрин 3-8
+![3-8](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/3-8.png)
 9. Вышел из контейнера
 exit
 10. Обращение на порт 8080 выдает ошибку, т.к. 80 порт нашего контейнера который прокидывался на порт 8080 мы поменяли 81
-скрин 3-10
+![3-10](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/3-10.png)
 12. Удаляем контейнер без остатка с ключем -f
 docker rm custom-nginx-t2 -f custom-nginx-t2
+![3-12](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/3-12.png)
 
 
 ## Задача 4
@@ -133,6 +135,22 @@ docker rm custom-nginx-t2 -f custom-nginx-t2
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
 ## Решение 4
+
+1. Скачал образ centos:7
+docker pull centos:7
+2. Скачал образ debian
+docker pull debian
+3. Запустил centos и пробросил нашу текущую директорию внутрь контейнера в каталог data
+![4-3](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/4-3.png)
+4. Запустил debian и пробросил нашу текущую директорию внутрь контейнера в каталог data
+![4-4](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/4-4.png)
+![4-3-1](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/4-3-1.png)
+5. Подключился к контейнеру centos и в каталоге /data создал файл file1
+![4-5](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/4-5.png)
+6. Создал файл file2 на хостовой машине в текущей директории
+![4-6](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/4-6.png)
+7. Подключился к контейнеру debian и вывел файлы содержащиеся в директории /data 
+![4-7](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/4-7.png)
 
 ## Задача 5
 
@@ -184,6 +202,53 @@ services:
 ---
 
 ## Решение 5
+
+1. Создал 2 файла с содержимым из задания
+![5-1](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/5-1.png)
+
+Выполнил команду docker compose up -d
+![5-2](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/5-2.png)
+Docker compose в связи с наличием нескольких файлов конфигураций, выбирает первый файл который он находит согласно внутреннему порядку приоритетов. В данном случае это файл compose.yaml 
+![5-2-1](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/5-2-1.png)
+
+2. 
+```
+version: "3"
+include:
+  - docker-compose.yaml
+services:
+   portainer:
+     image: portainer/portainer-ce:latest
+     network_mode: host
+     ports:
+       - "9000:9000"
+     volumes:
+       - /var/run/docker.sock:/var/run/docker.sock
+```
+![5-2-2](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/5-2-2.png)
+
+3. скрин 5-3
+![5-3-1](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/5-3-1.png)
+
+4. Произвел начальную настройку porainer
+![5-4](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/5-4.png)
+
+5. 
+![5-5](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/5-5.png)
+![2-3](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/5-6.png)
+![5-7](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/5-7.png)
+![5-8](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/5-8.png)
+
+6. 
+![6-1](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/6-1.png)
+
+7. Удалил файл compose.yaml и запустим команду docker compose up -d
+![7-1](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/7-1.png)
+Предложено запустить команду с флагом --remove-orphans для очистки сиротского контейнера task5-portainer-1
+Выполнил предложенные дейстрия 
+![7-2](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/7-2.png)
+Погасил проект docker stop $(docker ps -a -q)
+![7-3](https://github.com/KargapoltcevKS/Docker-Compoce/blob/main/img/7-3.png)
 
 ### Правила приема
 
